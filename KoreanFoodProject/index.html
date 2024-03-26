@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koren Food</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+
+
+
+<body class="">
+
+
+
+    <div class="container">
+        <img src="https://asiasociety.org/sites/default/files/styles/1200w/public/K/korean-flag.jpg" class="bear-image" alt="">
+
+
+
+        <header>
+            <h1>Korean Food</h1>
+            <div class="shopping">
+
+                <img src="https://nationaltoday.com/wp-content/uploads/2021/06/Shopping-Cart-Day-1.jpg">
+                <span class="quantity">0</span>
+            </div>
+        </header>
+
+        <div class="list">
+
+        </div>
+    </div>
+    <div class="card">
+        <h1>Card</h1>
+        <ul class="listCard" id="listCard2">
+        </ul>
+        <div class="checkOut" id="checkOut">
+            <div class="total">0</div>
+            <div class="closeShopping">Close</div>
+            <button id="save-pdf">Save as PDF</button>
+            <button onclick="clearCart()">Clear Cart</button>
+        </div>
+
+    </div>
+
+
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+        document.getElementById("save-pdf").addEventListener("click", function() {
+            const listCard2Element = document.querySelector(".listCard");
+            const checkOutElement = document.getElementById("checkOut");
+
+            // เรียกใช้ฟังก์ชัน reloadCard2 เพื่อเตรียมข้อมูลการ์ด
+            reloadCard2();
+
+            // สร้าง div ใหม่เพื่อเก็บเนื้อหาของ listCard2 และ checkOut
+            const combinedElement = document.createElement('div');
+
+            // เพิ่มเนื้อหาของ listCard2 เข้าไปใน combinedElement
+            combinedElement.appendChild(listCard2Element.cloneNode(true)); // cloneNode(true) จะคัดลอก child nodes ทั้งหมดด้วย
+
+            // เพิ่มเนื้อหาของ checkOut เข้าไปใน combinedElement
+            combinedElement.appendChild(checkOutElement.cloneNode(true));
+
+            // บันทึกเนื้อหาที่รวมกันเป็น PDF
+            html2pdf().from(combinedElement).save();
+        });
+    </script>
+
+</body>
+
+
+
+</html>
